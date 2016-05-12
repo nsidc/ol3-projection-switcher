@@ -1,6 +1,6 @@
 {
   "name": "ol3-projection-switcher",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "OpenLayers 3 controls to change projections.",
   "main": "dist/projectionswitcher.js",
   "scripts": {
