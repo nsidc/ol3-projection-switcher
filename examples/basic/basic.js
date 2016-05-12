@@ -2,6 +2,9 @@ import ol from 'openlayers';
 import 'ol3-projection-switcher';
 
 (function() {
+  /* Configuration for the Projection Switcher control.
+   * Order of the projections will reflect the order of the buttons in the control.
+   */
   var config = {
     projections: {
       'EPSG:3857': {
@@ -28,6 +31,7 @@ import 'ol3-projection-switcher';
     }
   };
 
+  // Initialize each layer for the map
   var layers = [
     new ol.layer.Tile({
       source: new ol.source.MapQuest({
@@ -47,6 +51,7 @@ import 'ol3-projection-switcher';
     })
   ];
 
+  // Create the OpenLayers map and add the layers
   var map = new ol.Map({
     target: 'map',
     layers: layers,
@@ -58,6 +63,7 @@ import 'ol3-projection-switcher';
     })
   });
 
+  // Create the Projection Switcher control and add it to the map
   var projectionSwitcher = new ol.control.ProjectionSwitcher(config);
   map.addControl(projectionSwitcher);
 })();

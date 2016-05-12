@@ -57,6 +57,7 @@ ol.control.ProjectionSwitcher.prototype.switchProjection = function(layerId, sta
 
 ol.control.ProjectionSwitcher.prototype._createProjectionButton = function(projectionCode, projectionConfig, parentElement) {
   let label = projectionConfig.label ? projectionConfig.label : '';
+  let name = projectionConfig.name ? projectionConfig.name : '';
   proj4.defs(projectionCode, projectionConfig.proj4def);
 
   if(projectionConfig.visible) {

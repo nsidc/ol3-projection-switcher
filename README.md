@@ -12,7 +12,7 @@ npm install ol3-projection-switcher
 
 Create a Projection Switcher control and add it to the map.
 ```
-var options = {
+var config = {
   projections: {
     'EPSG:4326': {
       layerId: 'arctic',
@@ -22,19 +22,24 @@ var options = {
     }
   }
 }
-var projectionSwitcher = new ol.control.ProjectionSwitcher(options);
+var projectionSwitcher = new ol.control.ProjectionSwitcher(config);
 map.addControl(projectionSwitcher);
 ```
 
-### Options
-- `layerId` Unique identifier for this projection
-- `name` Hover text used for the projection button
-- `label` Text used for the projection button
-- `proj4def` Proj4 Definition from http://epsg.io/
-- `extent` Extent of the layer
-- `maxResolution` Max Resolution of the layer
-- `zoom` Initial zoom level
-- `maxZoom` Maximum zoom level
+### Configuration
+
+The Projection Switcher configuration contains an object with a 'projections' property. Projections are
+configured with an EPSG code. Each projection is configured using the following properties.
+
+- `layerId` (Required) Unique identifier for this projection
+- `name` (Optional) Hover text used for the projection button
+- `label` (Optional) Text used for the projection button
+- `visible` (Required) Set the default layer visibility
+- `proj4def` (Required) Proj4 Definition from http://epsg.io/
+- `extent` (Required) Extent of the layer
+- `maxResolution` (Required) Max Resolution of the layer
+- `zoom` (Required) Initial zoom level
+- `maxZoom` (Required) Maximum zoom level
 
 ## Examples
 
