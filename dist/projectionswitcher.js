@@ -85,53 +85,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  this.className = 'ol-unselectable ol-control projection-switcher';
 	
-	  var element = document.createElement('div');
-	  element.className = this.className;
+	  var projectionSwitcherContainer = document.createElement('div');
+	  projectionSwitcherContainer.className = this.className;
 	
-	  var input = document.createElement('input');
-	  input.setAttribute('id', 'current-projection');
-	  input.setAttribute('hidden', 'hidden');
-	  input.setAttribute('value', 'EPSG:3857');
-	  element.appendChild(input);
-	
-	  var code, button;
-	  for (code in projections) {
-	    var label = projections[code].label ? projections[code].label : '';
-	    _proj2.default.defs(code, projections[code].proj4def);
-	
-	    button = document.createElement('button');
-	    button.setAttribute('id', 'projection-' + projections[code].layerId);
-	    button.setAttribute('title', 'Show ' + projections[code].name);
-	    button.setAttribute('data-layer', projections[code].layerId);
-	    button.setAttribute('data-projection', code);
-	    button.setAttribute('data-extent', projections[code].extent);
-	    button.setAttribute('data-maxResolution', projections[code].maxResolution);
-	    button.setAttribute('data-zoom', projections[code].zoom);
-	    button.setAttribute('data-maxZoom', projections[code].maxZoom);
-	    button.innerHTML = label;
-	    element.appendChild(button);
-	
-	    var this_ = this;
-	
-	    button.onclick = function (e) {
-	      e = e || window.event;
-	
-	      var startProjection = document.getElementById('current-projection').value;
-	      document.getElementById('current-projection').value = e.toElement.getAttribute('data-projection');
-	      var layerId = e.toElement.getAttribute('data-layer');
-	      var endProjection = e.toElement.getAttribute('data-projection');
-	      var extent = e.toElement.getAttribute('data-extent').split(',');
-	      var maxResolution = e.toElement.getAttribute('data-maxResolution');
-	      var zoom = e.toElement.getAttribute('data-zoom');
-	      var maxZoom = e.toElement.getAttribute('data-maxZoom');
-	
-	      this_.switchProjection(layerId, startProjection, endProjection, extent, maxResolution, zoom, maxZoom);
-	      e.preventDefault();
-	    };
+	  var projectionCode;
+	  for (projectionCode in projections) {
+	    this._createProjectionButton(projectionCode, projections[projectionCode], projectionSwitcherContainer);
 	  }
 	
 	  _openlayers2.default.control.Control.call(this, {
-	    element: element,
+	    element: projectionSwitcherContainer,
 	    target: options.target
 	  });
 	};
@@ -163,6 +126,55 @@ return /******/ (function(modules) { // webpackBootstrap
 	    });
 	    this.getMap().setView(newView);
 	  }
+	};
+	
+	_openlayers2.default.control.ProjectionSwitcher.prototype._createProjectionButton = function (projectionCode, projectionConfig, parentElement) {
+	  var label = projectionConfig.label ? projectionConfig.label : '';
+	  _proj2.default.defs(projectionCode, projectionConfig.proj4def);
+	
+	  if (projectionConfig.visible) {
+	    // Create element to track the selected projection
+	    var input = document.createElement('input');
+	    input.setAttribute('id', 'current-projection');
+	    input.setAttribute('hidden', 'hidden');
+	    input.setAttribute('value', projectionCode);
+	    parentElement.appendChild(input);
+	  }
+	
+	  var button = document.createElement('button');
+	  button.setAttribute('id', 'projection-' + projectionConfig.layerId);
+	  button.setAttribute('title', 'Show ' + projectionConfig.name);
+	  button.setAttribute('data-layer', projectionConfig.layerId);
+	  button.setAttribute('data-projection', projectionCode);
+	  button.setAttribute('data-extent', projectionConfig.extent);
+	  button.setAttribute('data-maxResolution', projectionConfig.maxResolution);
+	  button.setAttribute('data-zoom', projectionConfig.zoom);
+	  button.setAttribute('data-maxZoom', projectionConfig.maxZoom);
+	  button.innerHTML = label;
+	  parentElement.appendChild(button);
+	
+	  this._addClickEvent(button);
+	};
+	
+	_openlayers2.default.control.ProjectionSwitcher.prototype._addClickEvent = function (button) {
+	  var this_ = this;
+	
+	  button.onclick = function (e) {
+	    e = e || window.event;
+	
+	    var startProjection = document.getElementById('current-projection').value;
+	    var input = document.getElementById('current-projection');
+	    input.setAttribute('value', e.toElement.getAttribute('data-projection'));
+	    var layerId = e.toElement.getAttribute('data-layer');
+	    var endProjection = e.toElement.getAttribute('data-projection');
+	    var extent = e.toElement.getAttribute('data-extent').split(',');
+	    var maxResolution = e.toElement.getAttribute('data-maxResolution');
+	    var zoom = e.toElement.getAttribute('data-zoom');
+	    var maxZoom = e.toElement.getAttribute('data-maxZoom');
+	
+	    this_.switchProjection(layerId, startProjection, endProjection, extent, maxResolution, zoom, maxZoom);
+	    e.preventDefault();
+	  };
 	};
 
 /***/ },

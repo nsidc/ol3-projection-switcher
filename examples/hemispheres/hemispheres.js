@@ -18,6 +18,7 @@ import 'ol3-projection-switcher';
         layerId: 'geographic',
         name: 'WGS 84',
         label: 'G',
+        visible: true,
         proj4def: '+proj=longlat +datum=WGS84 +no_defs',
         extent: [-180.0, -90.0, 180.0, 90.0],
         maxResolution: 0.5625,
@@ -60,7 +61,7 @@ import 'ol3-projection-switcher';
           tileSize: 512
       })
     }),
-    visible: true,
+    visible: config.projections["EPSG:4326"].visible,
     id: config.projections["EPSG:4326"].layerId
   });
   northLayer = new ol.layer.Tile({
@@ -83,7 +84,7 @@ import 'ol3-projection-switcher';
           tileSize: 512
       })
     }),
-    visible: false,
+    visible: config.projections["EPSG:3413"].visible,
     id: config.projections["EPSG:3413"].layerId
   });
   southLayer = new ol.layer.Tile({
@@ -107,7 +108,7 @@ import 'ol3-projection-switcher';
           tileSize: 512
       })
     }),
-    visible: false,
+    visible: config.projections["EPSG:3031"].visible,
     id: config.projections["EPSG:3031"].layerId
   });
 

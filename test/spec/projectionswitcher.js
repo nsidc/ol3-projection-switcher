@@ -15,6 +15,7 @@ describe('ol.control.ProjectionSwitcher', function() {
         'EPSG:3857': {
           layerId: 'webmercator',
           name: 'WGS 84 Web Mercator',
+          visible: true,
           proj4def: '+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext  +no_defs',
           extent: [-20026376.39, -20048966.10, 20026376.39, 20048966.10],
           maxResolution: 156543.0339,
@@ -39,7 +40,8 @@ describe('ol.control.ProjectionSwitcher', function() {
           layer: 'sat'
         }),
         id: config.projections['EPSG:3857'].layerId,
-        extent: config.projections['EPSG:3857'].extent
+        extent: config.projections['EPSG:3857'].extent,
+        visible: config.projections['EPSG:3857'].visible
       }),
       new ol.layer.Tile({
         source: new ol.source.MapQuest({
@@ -47,7 +49,7 @@ describe('ol.control.ProjectionSwitcher', function() {
         }),
         id: config.projections['EPSG:4326'].layerId,
         extent: config.projections['EPSG:4326'].extent,
-        visible: false
+        visible: config.projections['EPSG:4326'].visible
       })
     ];
 
