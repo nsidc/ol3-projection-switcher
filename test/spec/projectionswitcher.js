@@ -6,7 +6,7 @@ import 'openlayers-projection-switcher';
 
 chai.should();
 
-describe('ol.control.ProjectionSwitcher', function() {
+describe('ol.control.ProjectionSwitcher', function () {
   var map, target, projectionSwitcher;
 
   beforeEach(function () {
@@ -86,8 +86,33 @@ describe('ol.control.ProjectionSwitcher', function() {
     });
   });
 
-  describe('Removing the control', function() {
-    it('Can be removed from the map', function() {
+  describe('Base layer visibility', function () {
+    it('Switches the map layer', function () {
+      var geographicLayer;
+      map.getLayers().forEach(function (layer) {
+        if ("geographic" == layer.get("id")) {
+          geographicLayer = layer;
+        }
+      });
+      $('#projection-geographic')[0].click();
+      geographicLayer.getVisible().should.equal(true);
+    });
+  });
+
+  describe('Switching the projection', function () {
+    it('Keeps track of the current projection', function () {
+      $('#projection-geographic')[0].click();
+      $('#current-projection')[0].value.should.equal("EPSG:4326");
+    });
+
+    it('Updates the map view', function () {
+      $('#projection-geographic')[0].click();
+      map.getView().getProjection().getCode().should.equal("EPSG:4326");
+    });
+  });
+
+  describe('Removing the control', function () {
+    it('Can be removed from the map', function () {
       map.removeControl(projectionSwitcher);
     });
   });

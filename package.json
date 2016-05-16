@@ -2,6 +2,11 @@
   "name": "ol3-projection-switcher",
   "version": "0.1.2",
   "description": "OpenLayers 3 controls to change projections.",
+  "homepage": "http://nsidc.org/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nsidc/ol3-projection-switcher"
+  },
   "main": "dist/projectionswitcher.js",
   "scripts": {
     "test": "webpack-dev-server --config webpack.test.config.js",
@@ -17,6 +22,12 @@
     "projection-switcher"
   ],
   "author": "National Snow and Ice Data Center (http://nsidc.org/)",
+  "contributors": [
+    {
+      "name": "Stuart Reed",
+      "email": "stuart.reed@nsidc.org"
+    }
+  ],
   "license": "MIT",
   "devDependencies": {
     "babel": "^6.5.2",
