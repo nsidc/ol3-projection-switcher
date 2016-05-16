@@ -130,6 +130,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	_openlayers2.default.control.ProjectionSwitcher.prototype._createProjectionButton = function (projectionCode, projectionConfig, parentElement) {
 	  var label = projectionConfig.label ? projectionConfig.label : '';
+	  var name = projectionConfig.name ? projectionConfig.name : '';
 	  _proj2.default.defs(projectionCode, projectionConfig.proj4def);
 	
 	  if (projectionConfig.visible) {
@@ -143,7 +144,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  var button = document.createElement('button');
 	  button.setAttribute('id', 'projection-' + projectionConfig.layerId);
-	  button.setAttribute('title', 'Show ' + projectionConfig.name);
+	  button.setAttribute('title', 'Show ' + name);
 	  button.setAttribute('data-layer', projectionConfig.layerId);
 	  button.setAttribute('data-projection', projectionCode);
 	  button.setAttribute('data-extent', projectionConfig.extent);

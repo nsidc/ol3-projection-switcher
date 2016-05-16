@@ -71,7 +71,7 @@ ol.control.ProjectionSwitcher.prototype._createProjectionButton = function(proje
 
   var button = document.createElement('button');
   button.setAttribute('id', 'projection-' + projectionConfig.layerId);
-  button.setAttribute('title', 'Show ' + projectionConfig.name);
+  button.setAttribute('title', 'Show ' + name);
   button.setAttribute('data-layer', projectionConfig.layerId);
   button.setAttribute('data-projection', projectionCode);
   button.setAttribute('data-extent', projectionConfig.extent);
